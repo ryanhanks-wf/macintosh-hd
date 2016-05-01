@@ -3,6 +3,9 @@
   user: ryanhanks
   connection: local
 
+  roles:
+    - roderik.superlumic-osx-defaults
+
   vars:
     - git_user_name: "Ryan Hanks"
     - git_user_email: ryan.hanks@workiva.com
@@ -57,4 +60,3 @@
         - google-chrome
         - atom
         - vmware-fusion
-

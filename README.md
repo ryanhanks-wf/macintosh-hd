@@ -10,3 +10,7 @@ This
 ```sh
 curl -s https://raw.githubusercontent.com/ryanhanks/macintosh-hd/master/initialize.sh | bash
 ```
+
+```sh
+curl -s https://raw.githubusercontent.com/ryanhanks/macintosh-hd/master/bootstrap.sh | bash
+```

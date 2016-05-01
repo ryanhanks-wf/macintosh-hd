@@ -1,14 +1,14 @@
 #!/usr/bin/env bash
 
 GITHUB_USER=ryanhanks
-REPO=mac-hd
+REPO=macintosh-hd
 
 # Initialize sudo
 sudo -v
 while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
 # Install ansible
-sudo easy_install pip==1.5.6
+sudo easy_install
 sudo pip install ansible
 
 # Make sure we have proper access to /usr/local
@@ -20,7 +20,7 @@ mkdir -p src/github.com/$GITHUB_USER
 pushd src/github.com/$GITHUB_USER
 
 # Clone the config repo
-git clone git@github.com:$USER/$REPO
+git clone git@github.com:$GITHUB_USER/$REPO
 
 # Run ansible against the config
 pushd $REPO

@@ -8,8 +8,9 @@ sudo -v
 while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
 # Install ansible
-sudo easy_install pip
-sudo pip install ansible
+sudo -H easy_install pip
+pip install --upgrade setuptools --user python
+pip install ansible --user python
 
 # Make sure we have proper access to /usr/local
 sudo chmod -R g+rwx /usr/local

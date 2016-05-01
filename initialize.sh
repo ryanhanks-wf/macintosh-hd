@@ -2,6 +2,6 @@
 sudo -v
 sudo -s 'ssh-keyscan -H github.com > /etc/ssh/ssh_known_hosts'
 ssh-keygen -t rsa
-pbcopy < ~/.ssh/idrsa.pub
+pbcopy < ~/.ssh/id_rsa.pub
 open 'https://github.com/settings/keys'
 xcode-select --install

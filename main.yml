@@ -1,0 +1,60 @@
+---
+- hosts: localhost
+  user: ryanhanks
+  connection: local
+
+  vars:
+    - git_user_name: "Ryan Hanks"
+    - git_user_email: ryan.hanks@workiva.com
+    - osx_defaults:
+      - domain: 'com.apple.dock'
+        key: 'autohide'
+        type: boolean
+        value: true
+      - domain: 'com.apple.dock'
+        key: 'minimize-to-application'
+        type: integer
+        value: 1
+      - domain: 'NSGlobalDomain'
+        key: 'AppleKeyboardUIMode'
+        type: integer
+        value: 3
+      - domain: 'NSGlobalDomain'
+        key: 'KeyRepeat'
+        type: integer
+        value: 0
+      - domain: 'NSGlobalDomain'
+        key: 'InitialKeyRepeat'
+        type: integer
+        value: 15
+      - domain: 'NSGlobalDomain'
+        key: 'com.apple.trackpad.scaling'
+        type: integer
+        value: 3
+
+
+  tasks:
+    - name: add to sudoers without password
+      become: yes
+      become_method: sudo
+      lineinfile: >
+        dest=/etc/sudoers
+        regexp="{{ item.regexp }}"
+        line="{{ item.line }}"
+        state=present
+        create=true
+      with_items:
+        - { regexp: '^ryanhanks', line: 'ryanhanks ALL=(ALL) NOPASSWD: ALL' }
+    - name: set never sleep
+      become: yes
+      become_method: sudo
+      shell: pmset  -a sleep 0
+    - include: roles/roderik.superlumic-homebrew/tasks/main.yml
+
+    - name: install cask applications
+      homebrew_cask: name={{item}} state=present
+      with_items:
+        - google-chrome
+        - atom
+        - vmware-fusion
+

@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -e
+
 GITHUB_USER=ryanhanks-wf
 REPO=macintosh-hd
 

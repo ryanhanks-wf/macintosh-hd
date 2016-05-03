@@ -57,6 +57,13 @@
       become: yes
       become_method: sudo
       shell: pmset  -a sleep 0
+    - name: clone dotfiles
+      git:
+        repo: git@github.com:ryanhanks-wf/dotfiles
+        dest: ~/src/github.com/ryanhanks-wf/dotfiles
+        update: no
+    - name: link dotfiles
+      file: src=~/src/github.com/ryanhanks-wf/dotfiles dest=~/dotfiles state=link
     - include: roles/roderik.superlumic-homebrew/tasks/main.yml
 
     - name: install cask applications
@@ -68,4 +75,3 @@
         - pycharm
         - hipchat
         - google-hangouts
-

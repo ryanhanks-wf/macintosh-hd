@@ -66,6 +66,14 @@
       file: src=~/src/github.com/ryanhanks-wf/dotfiles dest=~/dotfiles state=link
     - name: link bam_cache
       file: src=/Volumes/Data/.bam_cache dest=~/.bam_cache state=link
+    - name: create bam_download_cache dir
+      file: dest=/Volumes/Data/.pip_download_cache state=directory
+    - name: link bam_download_cache
+      file: dest=~/.pip/cache src=/Volumes/Data/.pip_download_cache state=link
+    - name: create wheelhouse dir
+      file: dest=/Volumes/Data/.pip_wheelhouse state=directory
+    - name: link bam_download_cache
+      file: dest=~/.pip/wheelhouse src=/Volumes/Data/.pip_wheelhouse state=link
     - name: create workspaces on /Volumes/Data
       file: dest=/Volumes/Data/workspaces state=directory
     - name: link workspaces

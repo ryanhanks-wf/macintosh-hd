@@ -11,11 +11,11 @@ This:
 4. Starts the xcode-select installation
 
 ```sh
-curl -s https://raw.githubusercontent.com/ryanhanks/macintosh-hd/master/initialize.sh | bash
+curl -s https://raw.githubusercontent.com/ryanhanks-wf/macintosh-hd/master/initialize.sh | bash
 ```
 
 ## Bootstrap
 
 ```sh
-curl -s https://raw.githubusercontent.com/ryanhanks/macintosh-hd/master/bootstrap.sh | bash
+curl -s https://raw.githubusercontent.com/ryanhanks-wf/macintosh-hd/master/bootstrap.sh | bash
 ```

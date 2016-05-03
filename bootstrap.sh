@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-GITHUB_USER=ryanhanks
+GITHUB_USER=ryanhanks-wf
 REPO=macintosh-hd
 
 # Initialize sudo

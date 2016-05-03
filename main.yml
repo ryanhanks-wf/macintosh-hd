@@ -8,7 +8,7 @@
 
   vars:
     - git_user_name: "Ryan Hanks"
-    - git_user_email: ryan.hanks@workiva.com
+    - git_user_email: ryan@ryanhanks.com
     - osx_defaults:
       - domain: 'com.apple.dock'
         key: 'autohide'

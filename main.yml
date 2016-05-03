@@ -64,6 +64,8 @@
         update: no
     - name: link dotfiles
       file: src=~/src/github.com/ryanhanks-wf/dotfiles dest=~/dotfiles state=link
+    - name: create bam_cache on /Volumes/Data
+      file: dest=/Volumes/Data/.bam_cache state=directory
     - name: link bam_cache
       file: src=/Volumes/Data/.bam_cache dest=~/.bam_cache state=link
     - name: create workspaces on /Volumes/Data

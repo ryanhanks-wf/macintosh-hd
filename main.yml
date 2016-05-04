@@ -116,3 +116,9 @@
         - homebrew/versions/node010
         - libjpeg
         - freetype
+
+    - name: clone a copy of the bam workspace to test against
+      git:
+        repo: git@github.com:ryanhanks-wf/bam_workspace
+        dest: ~/src/github.com/ryanhanks-wf/bam_workspace
+        update: no

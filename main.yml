@@ -93,3 +93,21 @@
         - hipchat
         - google-hangouts
         - hyperswitch
+
+    - name: install brew packages for bigsky
+      homebrew: name={{item}} state=present
+      with_items:
+        - ant
+        - maven30
+        - node010
+        - libjpeg
+        - freetype
+
+    - name: install casks for bigsky
+      homebrew_cask: name={{item}} state=present
+      with_items:
+        - java
+        - hyperswitch
+        - googleappengine
+        - flash-player-debugger
+        - ngrok

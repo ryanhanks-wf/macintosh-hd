@@ -64,6 +64,8 @@
         update: no
     - name: link dotfiles
       file: src=~/src/github.com/ryanhanks-wf/dotfiles dest=~/dotfiles state=link
+    - name: create ~/.pip
+      file: dest=~/.pip state=directory
     - name: create bam_cache on /Volumes/Data
       file: dest=/Volumes/Data/.bam_cache state=directory
     - name: link bam_cache

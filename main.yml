@@ -36,6 +36,11 @@
         value: 3
 
   tasks:
+    - stat: path="/Volumes/VMware Shared Folders/Data"
+      register: vmware_shared_folder_data
+    - name: create symlink to VMware Share Folders/Data if we're in a VM
+      file: dest=/Volumes/Data src="/Volumes/VMware Shared Folders/Data" state=link
+      when: vmware_shared_folder_data.stat.exists and vmware_shared_folder_data.stat.isdir
     - name: ignore images
       become: yes
       become_method: sudo

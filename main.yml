@@ -96,20 +96,23 @@
         - google-hangouts
         - hyperswitch
 
-    - name: install brew packages for bigsky
-      homebrew: name={{item}} state=present
-      with_items:
-        - ant
-        - maven30
-        - node010
-        - libjpeg
-        - freetype
+    - name: tap homebrew/versions
+      homebrew_tap: tap=homebrew/versions state=present
 
+    # java is a dependency of maven30
     - name: install casks for bigsky
       homebrew_cask: name={{item}} state=present
       with_items:
         - java
-        - hyperswitch
         - googleappengine
         - flash-player-debugger
         - ngrok
+
+    - name: install brew packages for bigsky
+      homebrew: name={{item}} state=present
+      with_items:
+        - ant
+        - homebrew/versions/maven30
+        - homebrew/versions/node010
+        - libjpeg
+        - freetype

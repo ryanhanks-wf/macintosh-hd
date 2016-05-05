@@ -24,4 +24,11 @@ curl -s https://raw.githubusercontent.com/ryanhanks-wf/macintosh-hd/master/boots
 1. Run `./post-bootstrap.sh`
 2. Authenticate HipChat
 3. Open VMware and add key
+4. Startup hyperswitch and configure to start on startup
+
+
+# Todo
+Configure VM with independent disk
+Figure out window size management solution
+
 

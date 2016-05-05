@@ -19,3 +19,9 @@ curl -s https://raw.githubusercontent.com/ryanhanks-wf/macintosh-hd/master/initi
 ```sh
 curl -s https://raw.githubusercontent.com/ryanhanks-wf/macintosh-hd/master/bootstrap.sh | bash
 ```
+## Post-bootstrap
+
+1. Run `./post-bootstrap.sh`
+2. Authenticate HipChat
+3. Open VMware and add key
+

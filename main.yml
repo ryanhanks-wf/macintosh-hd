@@ -7,6 +7,7 @@
     - roderik.superlumic-osx-defaults
 
   vars:
+    - use_zsh: true
     - git_user_name: "Ryan Hanks"
     - git_user_email: ryan.hanks@workiva.com
     - osx_defaults:
@@ -47,6 +48,18 @@
       copy:
         src: files/fstab
         dest: /etc/fstab
+    - name: Installing zsh package
+      homebrew:
+        name: "{{ item }}"
+        state: present
+      with_items:
+        - zsh
+
+    - name: Setting default shell
+      shell: "chsh -s $(which zsh) {{ ansible_ssh_user }}"
+      sudo: True
+      when: use_zsh
+
     - name: add to sudoers without password
       become: yes
       become_method: sudo

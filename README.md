@@ -28,9 +28,7 @@ curl -s https://raw.githubusercontent.com/ryanhanks-wf/macintosh-hd/master/boots
 
 
 # Todo
-- [ ] Configure VM with independent disk
+- [x] Configure VM with independent disk
 - [ ] Figure out window size management solution
-- [ ] Use zsh
-
-
-
+- [x] Use zsh
+- [ ] Add dart

@@ -156,3 +156,24 @@
         repo: git@github.com:ryanhanks-wf/bam_workspace
         dest: ~/src/github.com/ryanhanks-wf/bam_workspace
         update: no
+
+    - name: set computer name
+      command: scutil --set ComputerName "WF13482"
+      become: yes
+      become_method: sudo
+    - name: set displaysleep on battery
+      command: pmset -b displaysleep 5
+      become: yes
+      become_method: sudo
+    - name: set sleep on battery
+      command: pmset -b sleep 120
+      become: yes
+      become_method: sudo
+    - name: set displaysleep on charger
+      command: pmset -b displaysleep 60
+      become: yes
+      become_method: sudo
+    - name: set sleep on charger
+      command: pmset -b sleep 0
+      become: yes
+      become_method: sudo

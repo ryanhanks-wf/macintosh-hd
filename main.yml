@@ -77,22 +77,31 @@
     #     update: no
     # - name: link dotfiles.secret
     #   file: src=~/src/github.com/ryanhanks/dotfiles dest=~/dotfiles.secret state=link
-    - name: create ~/.pip
-      file: dest=~/.pip state=directory
     - name: create bam_cache on /Volumes/Data
-      file: dest=/Volumes/Data/.bam_cache state=directory
+      file: dest=/Volumes/Data/.bam_cache state=directory owner=ryanhanks group=admin
+      become: yes
+      become_method: sudo
+    - name: create bam_download_cache dir
+      file: dest=/Volumes/Data/.pip_download_cache state=directory owner=ryanhanks group=admin
+      become: yes
+      become_method: sudo
+    - name: create wheelhouse dir
+      file: dest=/Volumes/Data/.pip_wheelhouse state=directory owner=ryanhanks group=admin
+      become: yes
+      become_method: sudo
+    - name: create workspaces on /Volumes/Data
+      file: dest=/Volumes/Data/workspaces state=directory owner=ryanhanks group=admin
+      become: yes
+      become_method: sudo
+
     - name: link bam_cache
       file: src=/Volumes/Data/.bam_cache dest=~/.bam_cache state=link
-    - name: create bam_download_cache dir
-      file: dest=/Volumes/Data/.pip_download_cache state=directory
+    - name: create ~/.pip
+      file: dest=~/.pip state=directory
     - name: link bam_download_cache
       file: dest=~/.pip/cache src=/Volumes/Data/.pip_download_cache state=link
-    - name: create wheelhouse dir
-      file: dest=/Volumes/Data/.pip_wheelhouse state=directory
     - name: link bam_download_cache
       file: dest=~/.pip/wheelhouse src=/Volumes/Data/.pip_wheelhouse state=link
-    - name: create workspaces on /Volumes/Data
-      file: dest=/Volumes/Data/workspaces state=directory
     - name: link workspaces
       file: src=/Volumes/Data/workspaces dest=~/workspaces state=link
 

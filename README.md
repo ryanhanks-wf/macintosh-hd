@@ -24,7 +24,9 @@ curl -s https://raw.githubusercontent.com/ryanhanks-wf/macintosh-hd/master/boots
 1. Run `./post-bootstrap.sh`
 2. Authenticate HipChat
 3. Open VMware and add key
-4. Startup hyperswitch and configure to start on startup
+4. Startup hyperswitch and configure to start on startup 
+5. Open pycharm and configure for setting repository 
+  * `git@github.com:ryanhanks-wf/pycharm-settings`
 
 
 # Todo

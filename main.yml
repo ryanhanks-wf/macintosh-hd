@@ -37,11 +37,11 @@
         value: 3
 
   tasks:
-    - stat: path="/Volumes/VMware Shared Folders/Data"
-      register: vmware_shared_folder_data
-    - name: create symlink to VMware Share Folders/Data if we're in a VM
-      file: dest=/Volumes/Data src="/Volumes/VMware Shared Folders/Data" state=link
-      when: vmware_shared_folder_data.stat.exists and vmware_shared_folder_data.stat.isdir
+    # - stat: path="/Volumes/VMware Shared Folders/Data"
+    #   register: vmware_shared_folder_data
+    # - name: create symlink to VMware Share Folders/Data if we're in a VM
+    #   file: dest=/Volumes/Data src="/Volumes/VMware Shared Folders/Data" state=link
+    #   when: vmware_shared_folder_data.stat.exists and vmware_shared_folder_data.stat.isdir
     - name: ignore images
       become: yes
       become_method: sudo
@@ -82,13 +82,13 @@
         update: no
     - name: link dotfiles
       file: src=~/src/github.com/ryanhanks-wf/dotfiles dest=~/dotfiles state=link
-    - name: clone dotfiles.secret
-      git:
-        repo: git@github.com:ryanhanks-wf/dotfiles.secret
-        dest: ~/src/github.com/ryanhanks-wf/dotfiles.secret
-        update: no
-    - name: link dotfiles
-      file: src=~/src/github.com/ryanhanks-wf/dotfiles dest=~/dotfiles state=link
+    # - name: clone dotfiles.secret
+    #   git:
+    #     repo: git@github.com:ryanhanks/dotfiles.secret
+    #     dest: ~/src/github.com/ryanhanks/dotfiles.secret
+    #     update: no
+    # - name: link dotfiles.secret
+    #   file: src=~/src/github.com/ryanhanks/dotfiles dest=~/dotfiles.secret state=link
     - name: create ~/.pip
       file: dest=~/.pip state=directory
     - name: create bam_cache on /Volumes/Data

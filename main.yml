@@ -3,8 +3,8 @@
   user: ryanhanks
   connection: local
 
-  roles:
-    - roderik.superlumic-osx-defaults
+  # roles:
+  #   - roderik.superlumic-osx-defaults
 
   vars:
     - use_zsh: true
@@ -37,6 +37,8 @@
         value: 3
 
   tasks:
+    - osx_defaults: domain="{{ item.domain }}" key="{{ item.key }}" type="{{ item.type }}" value="{{ item.value }}" state=present
+      with_items: "{{ osx_defaults }}"
     # - stat: path="/Volumes/VMware Shared Folders/Data"
     #   register: vmware_shared_folder_data
     # - name: create symlink to VMware Share Folders/Data if we're in a VM
@@ -63,6 +65,20 @@
       become: yes
       become_method: sudo
       shell: pmset  -a sleep 0
+    - name: install homebrew via the curl oneliner
+      shell: ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+      args:
+        creates: /usr/local/bin/brew
+
+    - name: update and upgrade homebrew
+      homebrew: update_homebrew=yes upgrade_all=yes
+
+    - name: install homebrew cask
+      homebrew_tap: tap=caskroom/cask state=present
+
+    - name: install homebrew services
+      homebrew_tap: tap=homebrew/services state=present
+
     - name: clone dotfiles
       git:
         repo: git@github.com:ryanhanks-wf/dotfiles
@@ -105,7 +121,6 @@
     - name: link workspaces
       file: src=/Volumes/Data/workspaces dest=~/workspaces state=link
 
-    - include: roles/roderik.superlumic-homebrew/tasks/main.yml
     - name: Installing zsh package
       homebrew:
         name: "{{ item }}"

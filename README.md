@@ -27,6 +27,8 @@ curl -s https://raw.githubusercontent.com/ryanhanks-wf/macintosh-hd/master/boots
 4. Startup hyperswitch and configure to start on startup 
 5. Open pycharm and configure for setting repository 
   * `git@github.com:ryanhanks-wf/pycharm-settings`
+6. Open google app engine launcher and make symlinks
+
 
 
 # Todo

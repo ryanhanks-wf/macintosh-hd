@@ -21,6 +21,7 @@ curl -s https://raw.githubusercontent.com/ryanhanks-wf/macintosh-hd/master/boots
 ```
 ## Post-bootstrap
 
+1. Run ~/.osx and reboot
 2. Authenticate HipChat
 3. Open VMware and add key
 4. Startup hyperswitch and configure to start on startup

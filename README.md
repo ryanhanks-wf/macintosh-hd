@@ -25,7 +25,7 @@ curl -s https://raw.githubusercontent.com/ryanhanks-wf/macintosh-hd/master/boots
 2. Authenticate HipChat
 3. Open VMware and add key
 4. Startup hyperswitch and configure to start on startup
-5. Setup pycharm 
+5. Setup pycharm
   * Add License
   * Setting repository `git@github.com:ryanhanks-wf/pycharm-settings`
 6. Open google app engine launcher and make symlinks
@@ -39,3 +39,5 @@ curl -s https://raw.githubusercontent.com/ryanhanks-wf/macintosh-hd/master/boots
 - [x] Add dart
 - [ ] Enable auto-update for OS X
 - [ ] Find license for PyCharm
+- [ ] Add support for 'data' type for osx_defaults
+- [ ] Add support for 'application_dir' for homebrew_cask

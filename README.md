@@ -35,3 +35,4 @@ curl -s https://raw.githubusercontent.com/ryanhanks-wf/macintosh-hd/master/boots
 - [ ] Figure out window size management solution
 - [x] Use zsh
 - [x] Add dart
+- [ ] Enable auto-update for OS X

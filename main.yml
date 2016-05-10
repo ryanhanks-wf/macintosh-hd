@@ -3,13 +3,8 @@
   user: ryanhanks
   connection: local
 
-  # roles:
-  #   - roderik.superlumic-osx-defaults
-
   vars:
     - use_zsh: true
-    - git_user_name: "Ryan Hanks"
-    - git_user_email: ryan.hanks@workiva.com
     - osx_defaults:
       - domain: 'com.apple.dock'
         key: 'autohide'
@@ -37,19 +32,6 @@
         value: 3
 
   tasks:
-    - osx_defaults: domain="{{ item.domain }}" key="{{ item.key }}" type="{{ item.type }}" value="{{ item.value }}" state=present
-      with_items: "{{ osx_defaults }}"
-    # - stat: path="/Volumes/VMware Shared Folders/Data"
-    #   register: vmware_shared_folder_data
-    # - name: create symlink to VMware Share Folders/Data if we're in a VM
-    #   file: dest=/Volumes/Data src="/Volumes/VMware Shared Folders/Data" state=link
-    #   when: vmware_shared_folder_data.stat.exists and vmware_shared_folder_data.stat.isdir
-    - name: ignore images
-      become: yes
-      become_method: sudo
-      copy:
-        src: files/fstab
-        dest: /etc/fstab
     - name: add to sudoers without password
       become: yes
       become_method: sudo
@@ -61,6 +43,15 @@
         create=true
       with_items:
         - { regexp: '^ryanhanks', line: 'ryanhanks ALL=(ALL) NOPASSWD: ALL' }
+
+    - osx_defaults: domain="{{ item.domain }}" key="{{ item.key }}" type="{{ item.type }}" value="{{ item.value }}" state=present
+      with_items: "{{ osx_defaults }}"
+    - name: ignore images
+      become: yes
+      become_method: sudo
+      copy:
+        src: files/fstab
+        dest: /etc/fstab
     - name: set never sleep
       become: yes
       become_method: sudo
@@ -79,48 +70,6 @@
     - name: install homebrew services
       homebrew_tap: tap=homebrew/services state=present
 
-    - name: clone dotfiles
-      git:
-        repo: git@github.com:ryanhanks-wf/dotfiles
-        dest: ~/src/github.com/ryanhanks-wf/dotfiles
-        update: no
-    - name: link dotfiles
-      file: src=~/src/github.com/ryanhanks-wf/dotfiles dest=~/dotfiles state=link
-    # - name: clone dotfiles.secret
-    #   git:
-    #     repo: git@github.com:ryanhanks/dotfiles.secret
-    #     dest: ~/src/github.com/ryanhanks/dotfiles.secret
-    #     update: no
-    # - name: link dotfiles.secret
-    #   file: src=~/src/github.com/ryanhanks/dotfiles dest=~/dotfiles.secret state=link
-    - name: create bam_cache on /Volumes/Data
-      file: dest=/Volumes/Data/.bam_cache state=directory owner=ryanhanks group=admin
-      become: yes
-      become_method: sudo
-    - name: create bam_download_cache dir
-      file: dest=/Volumes/Data/.pip_download_cache state=directory owner=ryanhanks group=admin
-      become: yes
-      become_method: sudo
-    - name: create wheelhouse dir
-      file: dest=/Volumes/Data/.pip_wheelhouse state=directory owner=ryanhanks group=admin
-      become: yes
-      become_method: sudo
-    - name: create workspaces on /Volumes/Data
-      file: dest=/Volumes/Data/workspaces state=directory owner=ryanhanks group=admin
-      become: yes
-      become_method: sudo
-
-    - name: link bam_cache
-      file: src=/Volumes/Data/.bam_cache dest=~/.bam_cache state=link
-    - name: create ~/.pip
-      file: dest=~/.pip state=directory
-    - name: link bam_download_cache
-      file: dest=~/.pip/cache src=/Volumes/Data/.pip_download_cache state=link
-    - name: link bam_download_cache
-      file: dest=~/.pip/wheelhouse src=/Volumes/Data/.pip_wheelhouse state=link
-    - name: link workspaces
-      file: src=/Volumes/Data/workspaces dest=~/workspaces state=link
-
     - name: Installing zsh package
       homebrew:
         name: "{{ item }}"
@@ -133,44 +82,14 @@
       sudo: True
       when: use_zsh
 
-
-    - name: install cask applications
-      homebrew_cask: name={{item}} state=present
-      with_items:
-        - google-chrome
-        - atom
-        - vmware-fusion
-        - pycharm
-        - hipchat
-        - google-hangouts
-        - hyperswitch
-
-    - name: tap homebrew/versions
-      homebrew_tap: tap=homebrew/versions state=present
-
-    # java is a dependency of maven30
-    - name: install casks for bigsky
-      homebrew_cask: name={{item}} state=present
-      with_items:
-        - java
-        - googleappengine
-        - flash-player-debugger
-        - ngrok
-
-    - name: install brew packages for bigsky
-      homebrew: name={{item}} state=present
-      with_items:
-        - ant
-        - homebrew/versions/maven30
-        - homebrew/versions/node010
-        - libjpeg
-        - freetype
-
-    - name: clone a copy of the bam workspace to test against
+    - name: clone dotfiles
       git:
-        repo: git@github.com:ryanhanks-wf/bam_workspace
-        dest: ~/src/github.com/ryanhanks-wf/bam_workspace
+        repo: git@github.com:ryanhanks-wf/dotfiles
+        dest: ~/src/github.com/ryanhanks-wf/dotfiles
         update: no
+    - name: link dotfiles
+      file: src=~/src/github.com/ryanhanks-wf/dotfiles dest=~/dotfiles state=link
+
 
     - name: set computer name
       command: scutil --set ComputerName "WF13482"
@@ -192,3 +111,102 @@
       command: pmset -b sleep 0
       become: yes
       become_method: sudo
+    - name: sync dotfiles
+      command: ~/dotfiles/bootstrap.sh --force
+
+    # - stat: path="/Volumes/VMware Shared Folders/Data"
+    #   register: vmware_shared_folder_data
+    # - name: create symlink to VMware Share Folders/Data if we're in a VM
+    #   file: dest=/Volumes/Data src="/Volumes/VMware Shared Folders/Data" state=link
+    #   when: vmware_shared_folder_data.stat.exists and vmware_shared_folder_data.stat.isdir
+
+    - name: create workspaces on /Volumes/Data
+      file: dest=/Volumes/Data/workspaces state=directory owner=ryanhanks group=admin
+      become: yes
+      become_method: sudo
+
+
+
+    - name: install cask applications
+      homebrew_cask: name={{item}} state=present
+      with_items:
+        - google-chrome
+        - atom
+        - vmware-fusion
+        - pycharm
+        - hipchat
+        - google-hangouts
+        - hyperswitch
+
+    - name: tap homebrew/versions
+      homebrew_tap: tap=homebrew/versions state=present
+    - name: tap ryanhanks-wf/dart
+      homebrew_tap: tap=ryanhanks-wf/dart state=present
+    - name: install dart 1.15.0
+      homebrew: name=dart1150 install_options=with-content-shell,with-dartium state=present
+
+    # java is a dependency of maven30
+    - name: install casks for bigsky
+      homebrew_cask: name={{item}} state=present
+      with_items:
+        - java
+        - googleappengine
+        - flash-player-debugger
+        - ngrok
+
+    - name: install brew packages for bigsky / bam workspace
+      homebrew: name={{item}} state=present
+      with_items:
+        - ant
+        - homebrew/versions/maven30
+        - homebrew/versions/node010
+        - libjpeg
+        - freetype
+        - nginx
+
+    - name: create bam_cache on /Volumes/Data
+      file: dest=/Volumes/Data/.bam_cache state=directory owner=ryanhanks group=admin
+      become: yes
+      become_method: sudo
+    - name: create bam_download_cache dir
+      file: dest=/Volumes/Data/.pip_download_cache state=directory owner=ryanhanks group=admin
+      become: yes
+      become_method: sudo
+    - name: create wheelhouse dir
+      file: dest=/Volumes/Data/.pip_wheelhouse state=directory owner=ryanhanks group=admin
+      become: yes
+      become_method: sudo
+    - name: link bam_cache
+      file: src=/Volumes/Data/.bam_cache dest=~/.bam_cache state=link
+    - name: create ~/.pip
+      file: dest=~/.pip state=directory
+    - name: link bam_download_cache
+      file: dest=~/.pip/cache src=/Volumes/Data/.pip_download_cache state=link
+    - name: link bam_download_cache
+      file: dest=~/.pip/wheelhouse src=/Volumes/Data/.pip_wheelhouse state=link
+    - name: link workspaces
+      file: src=/Volumes/Data/workspaces dest=~/workspaces state=link
+
+    - name: clone a copy of the bam workspace to test against
+      git:
+        repo: git@github.com:ryanhanks-wf/bam_workspace
+        dest: ~/src/github.com/ryanhanks-wf/bam_workspace
+        update: no
+
+
+    - name: install virtualenv
+      command: pip install virtualenv
+      become: yes
+      become_method: sudo
+
+    - name: install compass-rgbapng
+      gem: name=compass-rgbapng state=present user_install=no
+      become: yes
+      become_method: sudo
+
+    - name: install node modules for wf-books
+      npm: name={{item}} global=yes state=present
+      with_items:
+        - phantomjs@1.9.1-0
+        - bower
+        - grunt-cli

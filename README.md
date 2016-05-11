@@ -41,3 +41,4 @@ curl -s https://raw.githubusercontent.com/ryanhanks-wf/macintosh-hd/master/boots
 - [ ] Find license for PyCharm
 - [ ] Add support for 'data' type for osx_defaults
 - [ ] Add support for 'application_dir' for homebrew_cask
+- [ ] http://apple.stackexchange.com/questions/59178/toggle-use-all-f1-f2-as-standard-keys-via-script

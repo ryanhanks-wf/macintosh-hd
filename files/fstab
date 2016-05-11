@@ -1,6 +1,8 @@
 LABEL=Install\040OS\040X\040El\040Capitan none hfs rw,noauto
 LABEL=Macintosh\040HD\040-\040Base\040Image none hfs rw,noauto
 LABEL=OS\040X\040Provisioning\040Helper none hfs rw,noauto
+LABEL=Macintosh\040HD\040-\040RDH none hfs rw,noauto
+LABEL=Macintosh\040HD\040-\040Workiva\040[Base\040Image] none hfs rw,noauto
 
 #
 # Warning - this file should only be modified with vifs(8)

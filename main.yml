@@ -30,6 +30,10 @@
         key: 'com.apple.trackpad.scaling'
         type: integer
         value: 3
+      - domain: 'NSGlobalDomain'
+        key: 'com.apple.keyboard.fnState'
+        type: boolean
+        value: true
       # - name: set keybinding for move to full screen
       #   domain: com.divisiblebyzero.Spectacle
       #   key: MoveToFullscreen

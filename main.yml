@@ -34,6 +34,10 @@
         key: 'com.apple.keyboard.fnState'
         type: boolean
         value: true
+      - domain: 'com.apple.TimeMachine'
+        key: 'DoNotOfferNewDisksForBackup'
+        type: boolean
+        value: true
       # - name: set keybinding for move to full screen
       #   domain: com.divisiblebyzero.Spectacle
       #   key: MoveToFullscreen

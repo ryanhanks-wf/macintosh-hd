@@ -100,6 +100,11 @@
       sudo: True
       when: use_zsh
 
+    - name: clone ryanhanks/macintosh-hd
+      git:
+        repo: git@github.com:ryanhanks/macintosh-hd
+        dest: ~/src/github.com/ryanhanks/macintosh-hd
+        update: no
     - name: clone dotfiles
       git:
         repo: git@github.com:ryanhanks-wf/dotfiles

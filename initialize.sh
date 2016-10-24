@@ -4,7 +4,8 @@
 set -e
 
 # Add github to known hosts
-echo "#!/bin/bash\nssh-keyscan -H github.com > /etc/ssh/ssh_known_hosts" > update_known_hosts.sh
+echo "#!/bin/bash" > update_known_hosts.sh
+echo "ssh-keyscan -H github.com > /etc/ssh/ssh_known_hosts" >> update_known_hosts.sh
 chmod 755 update_known_hosts.sh
 sudo update_known_hosts.sh
 rm update_known_hosts.sh
